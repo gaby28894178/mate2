@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Operaciones entre Conjuntos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    input {
+      width: 300px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 15px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 10px;
+      text-align: center;
+      background: #fff;
+    }
+    th {
+      background-color: #ddd;
+    }
+    .explicacion {
+      text-align: left;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Operaciones entre Conjuntos</h1>
+
+  <p>
+    <label>Universo U = </label>
+    <input type="text" id="universo" value="1,2,3,4,5,6,7,8,9">
+  </p>
+  <p>
+    <label>Conjunto A = </label>
+    <input type="text" id="conjuntoA" value="1,2,3,4">
+  </p>
+  <p>
+    <label>Conjunto B = </label>
+    <input type="text" id="conjuntoB" value="3,4,5,6">
+  </p>
+  <p>
+    <label>Conjunto C = </label>
+    <input type="text" id="conjuntoC" value="4,6,7,8">
+  </p>
+
+  <button onclick="calcular()">Calcular Operaciones</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Notación</th>
+        <th>Significado</th>
+        <th>Resultado</th>
+      </tr>
+    </thead>
+    <tbody id="resultados"></tbody>
+  </table>
+
+  <script>
+    function parseSet(input) {
+      return input.split(',').map(e => e.trim()).filter(e => e !== '');
+    }
+
+    function union(set1, set2) {
+      return Array.from(new Set([...set1, ...set2]));
+    }
+
+    function intersection(...sets) {
+      return sets.reduce((a, b) => a.filter(x => b.includes(x)));
+    }
+
+    function difference(set1, set2) {
+      return set1.filter(x => !set2.includes(x));
+    }
+
+    function symmetricDifference(set1, set2) {
+      return difference(set1, set2).concat(difference(set2, set1));
+    }
+
+    function isSubset(sub, sup) {
+      return sub.every(x => sup.includes(x));
+    }
+
+    function calcular() {
+      const A = parseSet(document.getElementById('conjuntoA').value);
+      const B = parseSet(document.getElementById('conjuntoB').value);
+      const C = parseSet(document.getElementById('conjuntoC').value);
+      const U = parseSet(document.getElementById('universo').value);
+
+      const resultados = [
+        ['A ∪ B', 'Unión: elementos que están en A o en B o en ambos.', union(A, B)],
+        ['B ∪ C', 'Unión: elementos que están en B o en C o en ambos.', union(B, C)],
+        ['A ∩ B ∩ C', 'Intersección: elementos comunes a A, B y C.', intersection(A, B, C)],
+        ['A - B', 'Diferencia: elementos en A que no están en B.', difference(A, B)],
+        ['B - C', 'Diferencia: elementos en B que no están en C.', difference(B, C)],
+        ['3 ∈ A', 'Pertenencia: ¿3 está en A?', A.includes('3') ? '✔️ Verdadero' : '❌ Falso'],
+        ['9 ∈ B', 'Pertenencia: ¿9 está en B?', B.includes('9') ? '✔️ Verdadero' : '❌ Falso'],
+        ['¬(3 ∈ C)', 'Negación: ¿3 NO está en C?', !C.includes('3') ? '✔️ Verdadero' : '❌ Falso'],
+        ['A ⊂ B', 'Subconjunto: todos los elementos de A están en B.', isSubset(A, B) ? '✔️ Verdadero' : '❌ Falso'],
+        ['A △ B', 'Disyunción simétrica: elementos que están en A o en B pero no en ambos.', symmetricDifference(A, B)],
+      ];
+
+      const tbody = document.getElementById('resultados');
+      tbody.innerHTML = ''; // Limpiar
+
+      resultados.forEach(([notacion, explicacion, resultado]) => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${notacion}</td>
+          <td class="explicacion">${explicacion}</td>
+          <td>{ ${Array.isArray(resultado) ? resultado.join(', ') : resultado} }</td>
+        `;
+        tbody.appendChild(fila);
+      });
+    }
+
+    window.onload = calcular;
+  </script>
+
+</body>
+</html>

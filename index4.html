@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Teoría de Conjuntos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Teoría de Conjuntos – Explicación</h1>
+
+        <h2>Conjuntos dados</h2>
+        <ul>
+            <li><strong>𝒰</strong> (Conjunto universal): {1, {3}, -2, 7, 10, {1, 2, 3}}</li>
+            <li><strong>A</strong> = {1, -2, 7, 3}</li>
+            <li><strong>B</strong> = {1, {3}, 10}</li>
+            <li><strong>C</strong> = {-2, {1, 2, 3}, 3}</li>
+        </ul>
+
+        <h2>Significado de los símbolos</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Símbolo</th>
+                    <th>Nombre</th>
+                    <th>Significado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>∈</td><td>Pertenece a</td><td>El elemento está dentro del conjunto. Ej: 1 ∈ A</td></tr>
+                <tr><td>∉</td><td>No pertenece a</td><td>El elemento no está en el conjunto.</td></tr>
+                <tr><td>∩</td><td>Intersección</td><td>Elementos comunes entre conjuntos (AND lógico).</td></tr>
+                <tr><td>∪</td><td>Unión</td><td>Elementos en uno o ambos conjuntos (OR lógico).</td></tr>
+                <tr><td>-</td><td>Diferencia</td><td>Elementos que están en el primero y no en el segundo.</td></tr>
+                <tr><td>△</td><td>Diferencia simétrica</td><td>Elementos que están en uno solo, no en ambos.</td></tr>
+                <tr><td>Aᶜ o ¬A</td><td>Complemento de A</td><td>Elementos en 𝒰 pero no en A.</td></tr>
+                <tr><td>¬</td><td>Negación lógica</td><td>Equivale a decir "no". Ej: ¬C</td></tr>
+                <tr><td>∧</td><td>Conjunción lógica</td><td>"Y" lógico – ambos deben cumplirse (∩).</td></tr>
+                <tr><td>∨</td><td>Disyunción lógica</td><td>"O" lógico – al menos uno se cumple (∪).</td></tr>
+                <tr><td>¡...!</td><td>Negación informal</td><td>Representa negación o énfasis.</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Análisis de operaciones</h2>
+        <ol>
+            <li><strong>A ∩ (B △ C):</strong> Primero se calcula B △ C = (B - C) ∪ (C - B), luego se hace la intersección con A.</li>
+            <li><strong>(A ∩ B) △ (A ∩ C):</strong> Se obtienen A ∩ B y A ∩ C, y luego su diferencia simétrica.</li>
+            <li><strong>¬A ∧ ¬B ∧ ¬C:</strong> Se obtienen los complementos de A, B y C respecto a 𝒰, y se intersectan.</li>
+        </ol>
+
+        <h2>Ejemplo visual con conjuntos simples</h2>
+        <p>Si A = {1, 2} y B = {2, 3}, entonces:</p>
+        <ul>
+            <li>A ∩ B = {2}</li>
+            <li>A ∪ B = {1, 2, 3}</li>
+            <li>A - B = {1}</li>
+            <li>B - A = {3}</li>
+            <li>A △ B = {1, 3}</li>
+        </ul>
+    </div>
+</body>
+</html>
